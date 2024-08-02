@@ -1,0 +1,57 @@
+.homepage-container {
+    background: url('./background.jpg') no-repeat center center fixed; 
+    background-size: cover;
+    height: 100vh;
+}
+
+.homepage-content {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+    max-width: 600px; /* Limit the width for better readability */
+    width: 100%;
+}
+
+.logo {
+    width: 120px;
+    height: auto;
+}
+
+h1 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h2 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.btn-success {
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+}
+
+.btn-success:hover {
+    background-color: #4cae4c;
+    border-color: #4cae4c;
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+/* CSS for fade-in animation */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 2s forwards; /* Adjust the duration as needed */
+}
+
+.fade-in-title {
+    animation-delay: 0s; /* Fade in immediately */
+}
+
+.fade-in-name {
+    animation-delay: 0.8s; /* Delay to start fading in after the title */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+
