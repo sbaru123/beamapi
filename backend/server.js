@@ -76,7 +76,7 @@ app.post('/login', (req, res) => {
 });
 
 // Users logic
-app.get('/users', (req, res) => {
+app.post('/users', (req, res) => {
     const sql = "SELECT name, email, street_address, state, zip_code, area, no_of_floors, year_built, purpose_usage FROM login"; 
     db.query(sql, (err, results) => {
         if (err) {
