@@ -22,6 +22,7 @@ db.connect(err => {
     console.log('Connected to database.');
 });
 
+
 // Signup logic
 app.post('/signup', async (req, res) => {
     console.log('Request body:', req.body);
@@ -29,7 +30,7 @@ app.post('/signup', async (req, res) => {
     // Hash the password before storing it
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-    const sql = "INSERT INTO login (name, email, password, street_address, state, zip_code, area, no_of_floors, year_built, purpose_usage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    const sql = "INSERT INTO buildingdetails (name, email, password, street_address, state, zip_code, area, no_of_floors, year_built, purpose_usage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     const values = [
         req.body.name,
         req.body.email, 
@@ -54,7 +55,7 @@ app.post('/signup', async (req, res) => {
 
 // Login logic
 app.post('/login', (req, res) => {
-    const sql = "SELECT * FROM login WHERE email = ?";
+    const sql = "SELECT * FROM buildingdetails WHERE email = ?";
 
     db.query(sql, [req.body.email], async (err, data) => {
         if (err) { 
@@ -76,8 +77,8 @@ app.post('/login', (req, res) => {
 });
 
 // Users logic
-app.post('/users', (req, res) => {
-    const sql = "SELECT name, email, street_address, state, zip_code, area, no_of_floors, year_built, purpose_usage FROM login"; 
+app.get('/users', (req, res) => {
+    const sql = "SELECT name, email, password, street_address, state, zip_code, area, no_of_floors, year_built, purpose_usage FROM buildingdetails"; 
     db.query(sql, (err, results) => {
         if (err) {
             console.error('Error fetching users:', err);
@@ -85,6 +86,28 @@ app.post('/users', (req, res) => {
         }
         res.json(results);
     });
+});
+
+//Utilization logic
+app.post('/utilization', (req, res) => {
+    const utilizationData = req.body;  // Directly access the array of objects
+
+    utilizationData.forEach((entry) => {
+        const { day, time, occupancy } = entry;
+
+        const sql = "INSERT INTO utilization (day, time, number_of_occupancy) VALUES (?, ?, ?)";
+        console.log('Executing SQL:', sql, [day, time, occupancy]);  // Log the SQL query
+
+        db.query(sql, [day, time, occupancy], (err, result) => {
+            if (err) {
+                console.error('Error inserting data into database:', err);
+                return res.status(500).json({ message: 'Error occurred while inserting data', error: err });
+            }
+            console.log('Data inserted:', result);  // Log the result
+        });
+    });
+
+    res.status(200).json({ message: 'Data inserted successfully' });
 });
 
 // Start the server
