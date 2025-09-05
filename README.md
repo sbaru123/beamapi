@@ -15,13 +15,18 @@ Built with **Node.js, Express.js, and MySQL**.
 ## Getting Started
 
 ### 1. Clone the Repository
+```bash
 git clone https://github.com/sbaru123/beamapi.git
 cd beamapi
+```
 
 ### 2. Install Dependencies
+```bash
 npm install
+```
 
 ### 3. Configure the Database
+```bash
 CREATE DATABASE beamdb; 
 --Update your configuration in config.js (or .env) with:
 module.exports = {
@@ -30,28 +35,42 @@ module.exports = {
   password: "your_mysql_password",
   database: "beamdb"
 };
+```
 
 ### 4. Run Migrations / Seed Data (Optional)
+```bash
 npm run migrate
 npm run seed
+```
 
 ### 5. Start the API Server
+```bash
 npm start
 --The API will be available at:
 http://localhost:5000
-
+```
 
 # Install dependencies
+```bash
 npm install
+```
 
 # Start the API server
+```bash
 npm start
+```
 
 # Run migrations (if available)
+```bash
 npm run migrate
+```
 
 # Seed database with initial data (if available)
+```bash
 npm run seed
+```
 
 # Run tests (if defined)
+```bash
 npm test
+```
